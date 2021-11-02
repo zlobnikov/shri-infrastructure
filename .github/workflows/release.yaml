@@ -1,0 +1,23 @@
+name: 'release'
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+    - name: 'setup node'
+      uses: actions/setup-node@v1
+
+    - name: 'install'
+      run: npm i
+
+    - name: 'done'
+      run: echo 'Done!'
