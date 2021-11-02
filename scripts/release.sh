@@ -2,21 +2,21 @@
 
 echo "Step 1"
 
-LIST = $(ls)
+LIST=$(ls)
 echo $LIST
 
 echo "Step 2"
 
-VERSION = $(git tag -l | sort -r | head -n1)
+VERSION=$(git tag -l | sort -r | head -n1)
 echo ${VERSION}
-PREVIOUS_VERSION = $(git tag --sort version:refname | tail -2 | head -n1)
+PREVIOUS_VERSION=$(git tag --sort version:refname | tail -2 | head -n1)
 echo ${PREVIOUS_VERSION}
 
 echo "Step 3"
 
-AUTHOR = $(git show "$VERSION" --pretty=format:"%an" --no-patch)
-DATE = $(git show "$VERSION" --pretty=format:"%ad" --no-patch)
-CHANGELOG = $(git log ${PREVIOUS_VERSION}.. --pretty=format:"%s | %an, %ad" --date=short)
+AUTHOR=$(git show "$VERSION" --pretty=format:"%an" --no-patch)
+DATE=$(git show "$VERSION" --pretty=format:"%ad" --no-patch)
+CHANGELOG=$(git log ${PREVIOUS_VERSION}.. --pretty=format:"%s | %an, %ad" --date=short)
 
 CREATE_TASK_URL="https://api.tracker.yandex.net/v2/issues/"
 
