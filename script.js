@@ -5,6 +5,7 @@ const operations = {
   '-': (a, b) => a - b,
   '*': (a, b) => a * b,
   '/': (a, b) => a / b,
+  ':': (a, b) => a / b,
   '%': (a, b) => a % b,
   '//': (a, b) => (a - a % b) / b,
 };
