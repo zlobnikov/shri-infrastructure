@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-VERSION = $(git tag --sort version:refname | tail -1 | head -n1)
+VERSION = $(git tag -l | sort -r | head -n1)
+echo ${VERSION}
 PREVIOUS_VERSION = $(git tag --sort version:refname | tail -2 | head -n1)
+echo ${PREVIOUS_VERSION}
 
 AUTHOR = $(git show "$VERSION" --pretty=format:"%an" --no-patch)
 DATE = $(git show "$VERSION" --pretty=format:"%ad" --no-patch)
