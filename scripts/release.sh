@@ -39,10 +39,13 @@ echo "Response: ${RESPONSE}."
 if [ ${RESPONSE} = 201 ]; then
   echo "Created"
   exit 0
-elif [ ${RESPONSE} = 404 ]; then
-  echo "Not found"
+elif [ ${RESPONSE} = 403 ]; then
+  echo "Auth Error"
   exit 1
-elif [ ${RESPONSE} = 409 ]; then
-  echo "Already exists"
+elif [ ${RESPONSE} = 404 ]; then
+  echo "Not Found"
   exit 2
+elif [ ${RESPONSE} = 409 ]; then
+  echo "Already Exists"
+  exit 3
 fi
