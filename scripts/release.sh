@@ -17,17 +17,21 @@ echo "Changelog\n${CHANGELOG}"
 CREATE_TASK_URL="https://api.tracker.yandex.net/v2/issues/"
 UNIQUE_KEY = "zlobnikov, ${VERSION}"
 
+REQUEST='{
+  "summary": "'"${SUMMARY}"'",
+  "description": "'"${CHANGELOG}"'",
+  "queue": "TMP",
+  "unique": "'"${UNIQUE_KEY}"'"
+}'
+
+echo "Request: ${REQUEST}."
+
 RESPONSE=$(
   curl -so dev/null -w '%{http_code}' -X POST ${CREATE_TASK_URL} \
   --header "Authorization: OAuth ${OAuth}" \
   --header "X-Org-ID: ${OrgId}" \
   --header 'Content-Type: application/json' \
-  --data-raw '{
-      "summary": "'${SUMMARY}'",
-      "description": "'${CHANGELOG}'",
-      "queue": "TMP",
-      "unique": "'${UNIQUE_KEY}'"
-  }'
+  --data "${REQUEST}"
 )
 
 echo "Response: ${RESPONSE}."
