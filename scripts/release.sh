@@ -1,28 +1,20 @@
 #!/usr/bin/env bash
 
-echo "Step 1"
-
-LIST=$(ls)
-echo $LIST
-
-echo "Step 2"
-
-VERSION=$(git tag -l | sort -r | head -n1)
+VERSION = $(git tag --sort version:refname | tail -1 | head -1)
+PREVIOUS_VERSION = $(git tag --sort version:refname | tail -2 | head -1)
+echo "versions:"
 echo ${VERSION}
-PREVIOUS_VERSION=$(git tag --sort version:refname | tail -2 | head -n1)
 echo ${PREVIOUS_VERSION}
-
-echo "Step 3"
 
 AUTHOR=$(git show "$VERSION" --pretty=format:"%an" --no-patch)
 DATE=$(git show "$VERSION" --pretty=format:"%ad" --no-patch)
+
 CHANGELOG=$(git log ${PREVIOUS_VERSION}.. --pretty=format:"%s | %an, %ad" --date=short)
+SUMMARY="Release ${VERSION} by ${AUTHOR_NAME}, ${DATE}"
+echo "Author: ${AUTHOR}, DATE: ${DATE}"
+echo "Changelog\n${CHANGELOG}"
 
 CREATE_TASK_URL="https://api.tracker.yandex.net/v2/issues/"
-
-SUMMARY="Release ${VERSION} by ${AUTHOR_NAME}, ${DATE}"
-DESCRIPTION="${CHANGELOG}"
-UNIQUE_KEY="pivacik/${LAST_RELEASE_TAG}"
 
 RESPONSE=$(
   curl -so dev/null -w '%{http_code}' -X POST ${CREATE_TASK_URL} \
@@ -31,11 +23,13 @@ RESPONSE=$(
   --header 'Content-Type: application/json' \
   --data-raw '{
       "summary": "'${SUMMARY}'",
-      "description": "'${DESCRIPTION}'",
+      "description": "'${CHANGELOG}'",
       "queue": "TMP",
       "unique": "'${VERSION}'"
   }'
 )
+
+echo "Response: ${RESPONSE}"
 
 if [ ${RESPONSE} = 201 ]; then
   echo "Created"
