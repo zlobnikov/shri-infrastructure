@@ -28,7 +28,7 @@ RESPONSE=$(
   curl -so dev/null -w '%{http_code}' -X POST ${CREATE_TASK_URL} \
   --header "Authorization: OAuth ${OAuth}" \
   --header "X-Org-ID: ${OrgId}" \
-  --header 'Content-Type: application/json' \
+  --header "Content-Type: application/json" \
   --data "${REQUEST}"
 )
 echo "Response: ${RESPONSE}."
