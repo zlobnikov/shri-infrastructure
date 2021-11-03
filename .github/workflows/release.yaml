@@ -19,11 +19,11 @@ jobs:
     - name: 'install'
       run: npm i
 
-    # - name: 'release'
-    #   run: sh ./scripts/release.sh
-    #   env:
-    #     OAuth: ${{ secrets.YANDEX_TRACKER_OAUTH }}
-    #     OrgId: ${{ secrets.YANDEX_TRACKER_ORG_ID}}
+    - name: 'release'
+      run: sh ./scripts/release.sh
+      env:
+        OAuth: ${{ secrets.YANDEX_TRACKER_OAUTH }}
+        OrgId: ${{ secrets.YANDEX_TRACKER_ORG_ID}}
 
     - name: 'test release'
       run: sh ./scripts/test.sh
