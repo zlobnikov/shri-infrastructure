@@ -4,7 +4,7 @@
   "description": "Вам необходимо настроить в любом репозитории скрипты для релизов. Также опишите в readme проекта, что происходит в релизных скриптах и как посмотреть результат их работы.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
   "homepage": "https://github.com/zlobnikov/shri-infrastructure#readme",
   "dependencies": {
     "http-server": "^14.0.0"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1"
   }
 }
