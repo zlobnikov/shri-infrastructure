@@ -16,8 +16,8 @@ TICKET=$(
   --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }"
 )
 
-TICKET_URL=${TICKET} | jq ".[].self"
-TICKET_DESC=${TICKET} | jq ".[].description"
+TICKET_URL=$(${TICKET} | jq ".[].self")
+TICKET_DESC=$(${TICKET} | jq ".[].description")
 
 echo "URL: ${TICKET_URL}"
 echo "Desc: ${TICKET_DESC}"
