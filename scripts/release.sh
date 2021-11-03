@@ -15,6 +15,7 @@ echo "Author: ${AUTHOR}, DATE: ${DATE}"
 echo "Changelog\n${CHANGELOG}"
 
 CREATE_TASK_URL="https://api.tracker.yandex.net/v2/issues/"
+UNIQUE_KEY = "zlobnikov, ${VERSION}"
 
 RESPONSE=$(
   curl -so dev/null -w '%{http_code}' -X POST ${CREATE_TASK_URL} \
@@ -25,11 +26,11 @@ RESPONSE=$(
       "summary": "'${SUMMARY}'",
       "description": "'${CHANGELOG}'",
       "queue": "TMP",
-      "unique": "'${VERSION}'"
+      "unique": "'${UNIQUE_KEY}'"
   }'
 )
 
-echo "Response: ${RESPONSE}"
+echo "Response: ${RESPONSE}."
 
 if [ ${RESPONSE} = 201 ]; then
   echo "Created"
