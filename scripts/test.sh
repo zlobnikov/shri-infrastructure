@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 RESULT=$(npm test 2>&1)
-# echo "Tests Results:\n${RESULT}"
+echo "Tests Results:\n${RESULT}"
 
 echo "getting release version"
 
@@ -12,12 +12,12 @@ UNIQUE_KEY="zlobnikov, ${VERSION}"
 
 echo "forming search request"
 
-SEARCH_REQUEST=${
-  "filter": {
-    "unique": "'"${UNIQUE_KEY}"'"
-  }
-}
-echo "search request:"
+# SEARCH_REQUEST=${
+#   "filter": {
+#     "unique":"'"${UNIQUE_KEY}"'"
+#   }
+# }
+# echo "search request:"
 # echo ${SEARCH_REQUEST}
 
 TICKET=$(
@@ -25,6 +25,6 @@ TICKET=$(
   --header "Authorization: OAuth ${OAuth}" \
   --header "X-Org-ID: ${OrgId}" \
   --header 'Content-Type: application/json' \
-  --data "${SEARCH_REQUEST}"
+  --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }")
 )
 echo "Ticket: ${TICKET}"
