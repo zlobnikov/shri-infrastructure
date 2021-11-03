@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-VERSION = $(git tag --sort version:refname | tail -1 | head -1)
-PREVIOUS_VERSION = $(git tag --sort version:refname | tail -2 | head -1)
+VERSION=$(git tag --sort version:refname | tail -1 | head -1)
+PREVIOUS_VERSION=$(git tag --sort version:refname | tail -2 | head -1)
 echo "versions:"
 echo ${VERSION}
 echo ${PREVIOUS_VERSION}
