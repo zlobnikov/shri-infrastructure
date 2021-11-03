@@ -10,12 +10,12 @@ AUTHOR=$(git show "$VERSION" --pretty=format:"%an" --no-patch)
 DATE=$(git show "$VERSION" --pretty=format:"%ad" --no-patch)
 
 CHANGELOG=$(git log ${PREVIOUS_VERSION}.. --pretty=format:"%s | %an, %ad" --date=short)
-SUMMARY="Release ${VERSION} by ${AUTHOR_NAME}, ${DATE}"
+SUMMARY="Release ${VERSION} by ${AUTHOR}, ${DATE}"
 echo "Author: ${AUTHOR}, DATE: ${DATE}"
 echo "Changelog\n${CHANGELOG}"
 
 CREATE_TASK_URL="https://api.tracker.yandex.net/v2/issues/"
-UNIQUE_KEY = "zlobnikov, ${VERSION}"
+UNIQUE_KEY="zlobnikov, ${VERSION}"
 
 REQUEST='{
   "summary": "'"${SUMMARY}"'",
