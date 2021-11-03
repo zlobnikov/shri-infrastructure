@@ -27,18 +27,14 @@ TICKET_DESC=$(
 echo "Ticket URL: ${TICKET_URL}"
 echo "Desc:\n${TICKET_DESC}"
 
-UPDATED_DESC="${TICKET_DESC}\nTests Results:\n${RESULT}"
-
-REQUEST='{
-  "description": "'"${UPDATED_DESC}"'"
-}'
+UPDATED_DESC=" ${TICKET_DESC}\nTests Results:\n${RESULT}"
 
 RESPONSE=$(
-  curl -sS -X PATCH ${TICKET_URL} \
+  curl -s -X PATCH ${TICKET_URL} \
   --header "Authorization: OAuth ${OAuth}" \
   --header "X-Org-ID: ${OrgId}" \
   --header "Content-Type: application/json" \
-  --data "${REQUEST}"
+  --data "{\"description\": \"$UPDATED_DESC\"}"
 )
 echo "Response: ${RESPONSE}."
 
