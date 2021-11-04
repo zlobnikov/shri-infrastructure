@@ -2,13 +2,13 @@
 
 # VERSION=$(git tag --sort version:refname | tail -1 | head -1)
 VERSION="v0.4.5"
-IMAGE_NAME="zlobnikov:${VERSION}"
+IMAGE_NAME="zlo:${VERSION}"
 
-docker build . --file DockerFile -t ${IMAGE_NAME}
+docker build -t "$IMAGE_NAME" .
 
 if [ $? != 0 ]; then
   STATUS=$?
-  echo "Something is wrong"
+  echo "Something is wrong but I don't care"
   exit ${STATUS}
 fi
 
