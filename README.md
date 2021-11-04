@@ -22,4 +22,5 @@
 # Примечания для проверяющих
 
 - вместо Travis CI использован сервис GitHub Actions;
-- коммиты именуются почти согласно https://www.conventionalcommits.org/ru/v1.0.0/
+- коммиты именуются почти согласно https://www.conventionalcommits.org/ru/v1.0.0/;
+- формат релизных тегов: v0.8.0
