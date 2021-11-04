@@ -23,9 +23,9 @@ TICKET_DESC=$(
   --header "Authorization: OAuth ${OAuth}" \
   --header "X-Org-ID: ${OrgId}" \
   --header 'Content-Type: application/json' \
-  # --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].description" | tr -s "\n" " "
   --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].description"
 )
+  # --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].description" | tr -s "\n" " "
 
 echo "Ticket URL: ${TICKET_URL}"
 echo "Desc:\n${TICKET_DESC}\n"
