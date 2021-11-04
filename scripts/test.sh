@@ -7,7 +7,7 @@ SEARCH_URL="https://api.tracker.yandex.net/v2/issues/_search"
 
 VERSION=$(git tag --sort version:refname | tail -1 | head -1)
 # UNIQUE_KEY="zlobnikov, ${VERSION}"
-UNIQUE_KEY="zlobnikov, v0.4.5"
+UNIQUE_KEY="zlobnikov, v0.4.5" #########################
 echo "Unique Key: ${UNIQUE_KEY}\n"
 
 TICKET_URL=$(
@@ -29,7 +29,8 @@ TICKET_DESC=$(
 echo "Ticket URL: ${TICKET_URL}"
 echo "Desc:\n${TICKET_DESC}\n"
 
-UPDATED_DESC=$("${TICKET_DESC}\nTests Results:\n${RESULT}" | tr -s "\n" " ")
+# UPDATED_DESC=$("${TICKET_DESC} Tests Results: ${RESULT}")
+UPDATED_DESC=${TICKET_DESC}"
 echo "\nUPDATED DESC:\n${UPDATED_DESC}\n"
 
 RESPONSE=$(
