@@ -8,7 +8,7 @@ AUTHOR=$(git show "$VERSION" --pretty=format:"%an" --no-patch)
 DATE=$(git show "$VERSION" --pretty=format:"%ad" --no-patch)
 echo "\nAuthor: ${AUTHOR}, date: ${DATE}"
 
-CHANGELOG=$(git log ${PREVIOUS_VERSION}.. --pretty=format:"%s | %an, %ad\n" --date=short)
+CHANGELOG=$(git log ${PREVIOUS_VERSION}.. --pretty=format:"%s | %an, %ad\n" --date=short | tr -s "\n" " ")
 SUMMARY="Release ${VERSION} by ${AUTHOR}, ${DATE}"
 echo "\nChangelog:\n${CHANGELOG}"
 
