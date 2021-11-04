@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# RESULT=$(npm test 2>&1 | tr -s "\n" "\\n")
-RESULT=$(npm test 2>&1)
+RESULT=$(npm test 2>&1  | tail -n +3 | tr -s "\n" " ")
 echo "\nTests Results:\n${RESULT}\n"
 
 SEARCH_URL="https://api.tracker.yandex.net/v2/issues/_search"
@@ -18,22 +17,7 @@ TICKET_URL=$(
   --header 'Content-Type: application/json' \
   --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].self"
 )
-
-# TICKET_DESC=$(
-#   curl -s -X POST ${SEARCH_URL} \
-#   --header "Authorization: OAuth ${OAuth}" \
-#   --header "X-Org-ID: ${OrgId}" \
-#   --header 'Content-Type: application/json' \
-#   --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].description"
-# )
-  # --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].description" | tr -s "\n" " "
-
 echo "Ticket URL: ${TICKET_URL}"
-# echo "Desc:\n${TICKET_DESC}\n"
-
-# UPDATED_DESC=$("${TICKET_DESC} Tests Results: ${RESULT}")
-# UPDATED_DESC="new info here ${TICKET_DESC}"
-# echo "\nUPDATED DESC:\n${UPDATED_DESC}\n"
 
 # RESPONSE=$(
 #   curl -s -X PATCH ${TICKET_URL} \
