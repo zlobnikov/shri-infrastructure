@@ -23,7 +23,8 @@ TICKET_DESC=$(
   --header "Authorization: OAuth ${OAuth}" \
   --header "X-Org-ID: ${OrgId}" \
   --header 'Content-Type: application/json' \
-  --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].description" | tr -s "\n" " "
+  # --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].description" | tr -s "\n" " "
+  --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].description"
 )
 
 echo "Ticket URL: ${TICKET_URL}"
@@ -42,20 +43,3 @@ RESPONSE=$(
 )
 
 # TODO: process response code
-
-if [ ${RESPONSE} = 200 ]; then
-  echo "Published"
-  exit 0
-elif [ ${RESPONSE} = 401 ]; then
-  echo "Auth Error"
-  exit 1
-elif [ ${RESPONSE} = 403 ]; then
-  echo "Auth Error"
-  exit 1
-elif [ ${RESPONSE} = 404 ]; then
-  echo "Not Found"
-  exit 2
-elif [ ${RESPONSE} = 409 ]; then
-  echo "Conflict"
-  exit 3
-fi
