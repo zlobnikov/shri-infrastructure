@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-RESULT=$(npm test 2>&1 | tr -s "\n" "\\n")
-# RESULT=$(npm test 2>&1)
+# RESULT=$(npm test 2>&1 | tr -s "\n" "\\n")
+RESULT=$(npm test 2>&1)
 echo "\nTests Results:\n${RESULT}\n"
 
 SEARCH_URL="https://api.tracker.yandex.net/v2/issues/_search"
@@ -48,8 +48,11 @@ RESPONSE=$(
   --header "Authorization: OAuth ${OAuth}" \
   --header "X-Org-ID: ${OrgId}" \
   --header "Content-Type: application/json" \
-  --data "{\"text\": \"${RESULT}\"}"
+  --data-raw '{
+      "text": "'"${RESULT}"'"
+  }'
 )
+  # --data "{\"text\": \"${RESULT}\"}"
 echo "Response: ${RESPONSE}."
 
 # TODO: process response code
