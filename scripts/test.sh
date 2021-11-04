@@ -7,6 +7,7 @@ SEARCH_URL="https://api.tracker.yandex.net/v2/issues/_search"
 
 VERSION=$(git tag --sort version:refname | tail -1 | head -1)
 UNIQUE_KEY="zlobnikov, ${VERSION}"
+echo "Unique Key: ${UNIQUE_KEY}"
 
 TICKET_URL=$(
   curl -s -X POST ${SEARCH_URL} \
