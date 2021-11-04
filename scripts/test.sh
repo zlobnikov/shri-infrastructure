@@ -28,6 +28,7 @@ echo "Ticket URL: ${TICKET_URL}"
 echo "Desc:\n${TICKET_DESC}\n"
 
 UPDATED_DESC=$("${TICKET_DESC}\nTests Results:\n${RESULT}" | tr -s "\n" " ")
+echo "\nUPDATED DESC:\n${UPDATED_DESC}\n"
 
 RESPONSE=$(
   curl -s -X PATCH ${TICKET_URL} \
