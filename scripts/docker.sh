@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# VERSION=$(git tag --sort version:refname | tail -1 | head -1)
-VERSION="v0.4.5"
+VERSION=$(git tag --sort version:refname | tail -1 | head -1)
 IMAGE="shri-infrastructure:${VERSION}"
 
 docker build . --file DockerFile -t ${IMAGE}
@@ -33,4 +32,4 @@ RESPONSE=$(
       "text": "'"${RESULT}"'"
   }'
 )
-echo "\nStatus code: ${RESPONSE}."
+echo "\nStatus code: ${RESPONSE}"
