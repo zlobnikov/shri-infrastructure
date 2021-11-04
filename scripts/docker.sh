@@ -3,13 +3,13 @@
 # VERSION=$(git tag --sort version:refname | tail -1 | head -1)
 VERSION="v0.4.5"
 
-docker build -t zlobnikov-app:${VERSION} .
+docker build -t shri-infrastructure:${VERSION}
 
 if [ $? != 0 ]; then
   exit $?
 fi
 
-RESULT="Docker Image Built (zlobnikov-app:${VERSION})"
+RESULT="Docker Image Built (shri-infrastructure:${VERSION})"
 echo "Result: ${RESULT}"
 
 UNIQUE_KEY="zlobnikov, ${VERSION}"
