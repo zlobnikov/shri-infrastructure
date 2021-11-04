@@ -2,8 +2,9 @@
 
 # VERSION=$(git tag --sort version:refname | tail -1 | head -1)
 VERSION="v0.4.5"
+IMAGE="shri-infrastructure:${VERSION}"
 
-docker build -t shri-infrastructure:${VERSION}
+docker build . --file DockerFile -t ${IMAGE}
 
 if [ $? != 0 ]; then
   exit $?
