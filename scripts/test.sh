@@ -27,7 +27,7 @@ TICKET_DESC=$(
 echo "Ticket URL: ${TICKET_URL}"
 echo "Desc:\n${TICKET_DESC}\n"
 
-UPDATED_DESC="patch #2"
+UPDATED_DESC="${TICKET_DESC}\\nTests Results:\\n${RESULT}"
 
 RESPONSE=$(
   curl -s -X PATCH ${TICKET_URL} \
@@ -36,6 +36,8 @@ RESPONSE=$(
   --header "Content-Type: application/json" \
   --data "{\"description\": \"${UPDATED_DESC}\"}"
 )
+
+# TODO: process response code
 
 if [ ${RESPONSE} = 200 ]; then
   echo "Published"
