@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-RESULT=$(npm test 2>&1 | tr -s "\n" " ")
+RESULT=$(npm test 2>&1 | tr -s "\n" "\\n")
 # RESULT=$(npm test 2>&1)
 echo "\nTests Results:\n${RESULT}\n"
 
