@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-RESULT=$(npm test 2>&1  | tail -n +3 | tr -s "\n" " ")
+RESULT=$(npm test 2>&1  | tail -n +4 | tr -s "\n" " ")
 echo "\nTests Results:\n${RESULT}\n"
 
 SEARCH_URL="https://api.tracker.yandex.net/v2/issues/_search"
@@ -19,14 +19,6 @@ TICKET_URL=$(
 )
 echo "Ticket URL: ${TICKET_URL}"
 
-# RESPONSE=$(
-#   curl -s -X PATCH ${TICKET_URL} \
-#   --header "Authorization: OAuth ${OAuth}" \
-#   --header "X-Org-ID: ${OrgId}" \
-#   --header "Content-Type: application/json" \
-#   --data "{\"description\": \"${UPDATED_DESC}\"}"
-# )
-
 RESPONSE=$(
   curl -so dev/null -w '%{http_code}' -X POST "${TICKET_URL}/comments" \
   --header "Authorization: OAuth ${OAuth}" \
@@ -36,7 +28,6 @@ RESPONSE=$(
       "text": "'"${RESULT}"'"
   }'
 )
-  # --data "{\"text\": \"${RESULT}\"}"
 echo "Response: ${RESPONSE}."
 
 # TODO: process response code
