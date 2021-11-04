@@ -18,28 +18,37 @@ TICKET_URL=$(
   --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].self"
 )
 
-TICKET_DESC=$(
-  curl -s -X POST ${SEARCH_URL} \
-  --header "Authorization: OAuth ${OAuth}" \
-  --header "X-Org-ID: ${OrgId}" \
-  --header 'Content-Type: application/json' \
-  --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].description"
-)
+# TICKET_DESC=$(
+#   curl -s -X POST ${SEARCH_URL} \
+#   --header "Authorization: OAuth ${OAuth}" \
+#   --header "X-Org-ID: ${OrgId}" \
+#   --header 'Content-Type: application/json' \
+#   --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].description"
+# )
   # --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].description" | tr -s "\n" " "
 
 echo "Ticket URL: ${TICKET_URL}"
-echo "Desc:\n${TICKET_DESC}\n"
+# echo "Desc:\n${TICKET_DESC}\n"
 
 # UPDATED_DESC=$("${TICKET_DESC} Tests Results: ${RESULT}")
-UPDATED_DESC="new info here ${TICKET_DESC}"
-echo "\nUPDATED DESC:\n${UPDATED_DESC}\n"
+# UPDATED_DESC="new info here ${TICKET_DESC}"
+# echo "\nUPDATED DESC:\n${UPDATED_DESC}\n"
+
+# RESPONSE=$(
+#   curl -s -X PATCH ${TICKET_URL} \
+#   --header "Authorization: OAuth ${OAuth}" \
+#   --header "X-Org-ID: ${OrgId}" \
+#   --header "Content-Type: application/json" \
+#   --data "{\"description\": \"${UPDATED_DESC}\"}"
+# )
 
 RESPONSE=$(
-  curl -s -X PATCH ${TICKET_URL} \
+  curl -so dev/null -w '%{http_code}' -X POST "${CREATE_TASK_URL}/comments" \
   --header "Authorization: OAuth ${OAuth}" \
   --header "X-Org-ID: ${OrgId}" \
   --header "Content-Type: application/json" \
-  --data "{\"description\": \"${UPDATED_DESC}\"}"
+  --data "{\"text\": \"${RESULT}\"}"
 )
+echo "Response: ${RESPONSE}."
 
 # TODO: process response code
