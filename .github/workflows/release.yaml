@@ -33,5 +33,11 @@ jobs:
         OAuth: ${{ secrets.YANDEX_TRACKER_OAUTH }}
         OrgId: ${{ secrets.YANDEX_TRACKER_ORG_ID}}
 
+    - name: 'build docker image'
+      run: sh ./scripts/docker.sh
+      env:
+        OAuth: ${{ secrets.YANDEX_TRACKER_OAUTH }}
+        OrgId: ${{ secrets.YANDEX_TRACKER_ORG_ID}}
+
     - name: 'YEAH!'
       run: echo 'YEAH!'
