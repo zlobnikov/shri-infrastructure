@@ -2,9 +2,9 @@
 
 # VERSION=$(git tag --sort version:refname | tail -1 | head -1)
 VERSION="v0.4.5"
-IMAGE_NAME="shri-infrastructure:${VERSION}"
+IMAGE_NAME="zlobnikov:${VERSION}"
 
-docker build -t ${IMAGE_NAME}
+docker build . --file DockerFile -t ${IMAGE_NAME}
 
 if [ $? != 0 ]; then
   STATUS=$?
