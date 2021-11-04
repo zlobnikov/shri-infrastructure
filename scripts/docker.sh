@@ -3,13 +3,14 @@
 # VERSION=$(git tag --sort version:refname | tail -1 | head -1)
 VERSION="v0.4.5"
 
-docker build -t "zlobnikov-app":"${VERSION}"
+docker build -t zlobnikov-app:${VERSION} .
 
 if [ $? != 0 ]; then
   exit $?
 fi
 
 RESULT="Docker Image Built (zlobnikov-app:${VERSION})"
+echo "Result: ${RESULT}"
 
 UNIQUE_KEY="zlobnikov, ${VERSION}"
 SEARCH_URL="https://api.tracker.yandex.net/v2/issues/_search"
@@ -21,6 +22,7 @@ TICKET_URL=$(
   --header 'Content-Type: application/json' \
   --data "{\"filter\": {\"unique\": \"$UNIQUE_KEY\"} }" | jq -r ".[].self"
 )
+echo "Ticket URL: ${TICKET_URL}"
 
 RESPONSE=$(
   curl -so dev/null -w '%{http_code}' -X POST "${TICKET_URL}/comments" \
