@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# RESULT=$(npm test 2>&1 | tr -s "\n" " ")
-RESULT=$(npm test 2>&1)
+RESULT=$(npm test 2>&1 | tr -s "\n" " ")
+# RESULT=$(npm test 2>&1)
 echo "\nTests Results:\n${RESULT}\n"
 
 SEARCH_URL="https://api.tracker.yandex.net/v2/issues/_search"
