@@ -2,17 +2,14 @@
 
 # VERSION=$(git tag --sort version:refname | tail -1 | head -1)
 VERSION="v0.4.5"
-IMAGE_NAME="zlo:${VERSION}"
 
-docker build -t "$IMAGE_NAME" .
+docker build -t shri-infrastructure:${VERSION}
 
 if [ $? != 0 ]; then
-  STATUS=$?
-  echo "Something is wrong but I don't care"
-  exit ${STATUS}
+  exit $?
 fi
 
-RESULT="Docker image built (${IMAGE_NAME})"
+RESULT="Docker image built"
 echo "\nResult: ${RESULT}"
 
 UNIQUE_KEY="zlobnikov, ${VERSION}"
