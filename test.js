@@ -10,8 +10,4 @@ describe('Simple Test Case', () => {
     it('Should return 30', () => {
         expect(10 * 3).toBe(30);
     });
-
-    it('Should return 20', () => {
-        expect(20 * 1).toBe(20);
-    });
 });
